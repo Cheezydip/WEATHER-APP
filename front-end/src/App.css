@@ -1,0 +1,437 @@
+.app {
+	min-height: 100vh;
+	padding: 28px 16px 40px;
+	color: #eef6ff;
+	transition: background 240ms ease, color 240ms ease;
+}
+
+.app.theme-day {
+	background:
+		radial-gradient(circle at 86% 10%, rgba(255, 236, 168, 0.42) 0 7%, rgba(255, 236, 168, 0.18) 8%, rgba(255, 236, 168, 0) 25%),
+		radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.5) 0 9%, rgba(255, 255, 255, 0) 23%),
+		linear-gradient(180deg, #1f49c9 0%, #3f78ef 44%, #79baff 72%, #cbe8ff 100%);
+	color: #102133;
+	--panel-bg: rgba(255, 255, 255, 0.2);
+	--panel-border: rgba(255, 255, 255, 0.28);
+	--heading-color: #102133;
+	--text-color: rgba(8, 20, 40, 0.82);
+	--tooltip-bg: rgba(255, 255, 255, 0.88);
+	--chart-grid: rgba(8, 20, 40, 0.09);
+	--chart-text: rgba(8, 20, 40, 0.82);
+	--chart-line: #1d54d6;
+	--chart-dot-fill: #ffffff;
+	--chart-dot-stroke: #1d54d6;
+	--chart-tooltip-stroke: rgba(29, 84, 214, 0.16);
+	--chart-tooltip-fill: rgba(255, 255, 255, 0.94);
+}
+
+.app.theme-night {
+	background:
+		radial-gradient(circle at top, rgba(159, 228, 255, 0.18), transparent 30%),
+		linear-gradient(180deg, #101c34 0%, #08111f 100%);
+	color: #eef6ff;
+	--panel-bg: rgba(10, 18, 32, 0.66);
+	--panel-border: rgba(159, 228, 255, 0.14);
+	--heading-color: #eef6ff;
+	--text-color: rgba(238, 246, 255, 0.82);
+	--tooltip-bg: rgba(10, 18, 32, 0.94);
+	--chart-grid: rgba(255, 255, 255, 0.14);
+	--chart-text: rgba(238, 246, 255, 0.85);
+	--chart-line: #9fe4ff;
+	--chart-dot-fill: #eef6ff;
+	--chart-dot-stroke: #9fe4ff;
+	--chart-tooltip-stroke: rgba(159, 228, 255, 0.58);
+	--chart-tooltip-fill: rgba(8, 15, 30, 0.72);
+}
+
+.container {
+	max-width: 1120px;
+	margin: 0 auto;
+	display: grid;
+	gap: 18px;
+	position: relative;
+	z-index: 1;
+}
+
+.bento-panel,
+.status {
+	border-radius: 24px;
+	padding: 16px;
+	backdrop-filter: blur(20px) saturate(135%);
+	-webkit-backdrop-filter: blur(20px) saturate(135%);
+	box-shadow:
+		0 18px 40px rgba(20, 35, 58, 0.08),
+		inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.bento-search {
+	position: relative;
+	z-index: 200;
+	overflow: visible;
+}
+
+.app.theme-night .bento-panel,
+.app.theme-night .status {
+	background: var(--panel-bg);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.app.theme-day .bento-panel,
+.app.theme-day .status {
+	background: var(--panel-bg);
+	border: 1px solid var(--panel-border);
+	box-shadow:
+		0 18px 42px rgba(14, 36, 76, 0.16),
+		inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.search-form {
+	display: block;
+	width: 100%;
+	color: var(--heading-color);
+}
+
+.search-field-wrap {
+	position: relative;
+	display: block;
+	width: 100%;
+	min-width: 0;
+}
+
+.search-input {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	font-size: 18px;
+	min-width: 0;
+	width: 80%;
+	height: 54px;
+	padding: 0 18px 0 58px;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.search-input::placeholder {
+	color: color-mix(in srgb, currentColor 54%, transparent);
+}
+
+.search-button {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 30px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 999px;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	color: var(--heading-color);
+	background: transparent;
+	box-shadow: none;
+	filter: none;
+	z-index: 2;
+}
+
+.search-button svg {
+	display: block;
+	width: 20px;
+	height: 20px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2.2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.search-suggestions {
+	position: static;
+	margin-top: 10px;
+	display: grid;
+	gap: 6px;
+	padding: 10px;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.68);
+	border: 1px solid rgba(255, 255, 255, 0.34);
+	backdrop-filter: blur(18px) saturate(140%);
+	-webkit-backdrop-filter: blur(18px) saturate(140%);
+	box-shadow: 0 18px 34px rgba(23, 40, 74, 0.14);
+}
+
+.search-suggestion {
+	border: 0;
+	background: transparent;
+	text-align: left;
+	padding: 10px 12px;
+	border-radius: 12px;
+	font: inherit;
+	color: #102133;
+	cursor: pointer;
+}
+
+.search-suggestion:hover {
+	background: rgba(31, 73, 201, 0.08);
+}
+
+.status {
+	text-align: left;
+}
+
+.status.loading {
+	color: #5bbfe5;
+	min-height: 402px;
+}
+
+.status.error {
+	color: #e97373;
+}
+
+.weather-bento {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-template-areas:
+		'current hourly'
+		'weekly weekly';
+	gap: 18px;
+	align-items: stretch;
+}
+
+.app.theme-day::before {
+	content: '';
+	position: fixed;
+	top: 18px;
+	right: 18px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background: radial-gradient(circle, #fff7c7 0 24%, #ffe07f 25% 44%, rgba(255, 224, 127, 0.12) 45% 100%);
+	box-shadow: 0 0 0 16px rgba(255, 240, 182, 0.14), 0 0 0 36px rgba(255, 240, 182, 0.06);
+	pointer-events: none;
+	opacity: 0.98;
+	z-index: 0;
+}
+
+.app .bento-panel,
+.app .status {
+	position: relative;
+	z-index: 1;
+}
+
+.bento-current {
+	grid-area: current;
+	display: flex;
+}
+
+.bento-hourly {
+	grid-area: hourly;
+	position: relative;
+	z-index: 1;
+	display: flex;
+}
+
+.bento-current .current-weather,
+.bento-hourly .hourly-forecast {
+	flex: 1;
+	height: 100%;
+	min-height: 402px;
+}
+
+.bento-weekly {
+	grid-area: weekly;
+}
+
+.current-weather,
+.hourly-forecast,
+.weekly-forecast {
+	display: grid;
+	gap: 12px;
+	padding: 0;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+	color: var(--text-color);
+}
+
+.current-weather {
+	position: relative;
+	overflow: hidden;
+	gap: 8px;
+	height: 100%;
+	min-height: 402px;
+}
+
+.current-weather .weather-picture-wrap,
+.weekly-picture-wrap {
+	margin-bottom: 0;
+	border-radius: 18px;
+	overflow: hidden;
+}
+
+.weather-picture,
+.weekly-picture {
+	display: block;
+	width: 100%;
+	height: 160px;
+	object-fit: cover;
+}
+
+.current-weather .weather-picture {
+	height: 110px;
+}
+
+.current-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.current-icon,
+.weekly-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: currentColor;
+}
+
+.current-icon svg,
+.weekly-icon svg,
+.hourly-tooltip svg {
+	filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.24));
+}
+
+.hourly-forecast svg {
+	overflow: visible;
+}
+
+.hourly-forecast .recharts-line,
+.hourly-forecast .recharts-line-curve {
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.local-time,
+.weekly-date,
+.weekly-forecast p,
+.hourly-forecast p {
+	color: inherit;
+	opacity: 0.8;
+}
+
+.hourly-chart-wrap {
+	padding: 12px 6px 4px;
+	min-height: 402px;
+	border-radius: 18px;
+	background: linear-gradient(180deg, color-mix(in srgb, var(--panel-bg) 84%, transparent), color-mix(in srgb, var(--panel-bg) 48%, transparent));
+}
+
+.hourly-tooltip {
+	min-width: 148px;
+	padding: 10px 12px;
+	border-radius: 14px;
+	background: var(--tooltip-bg);
+	border: 1px solid var(--chart-tooltip-stroke);
+	box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+	backdrop-filter: blur(14px);
+	text-align: left;
+}
+
+.tooltip-time {
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--chart-text);
+	margin-bottom: 8px;
+}
+
+.tooltip-main {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--chart-text);
+	margin-bottom: 6px;
+}
+
+.tooltip-condition {
+	font-size: 13px;
+	color: var(--chart-text);
+	line-height: 1.35;
+}
+
+.weekly-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.weekly-item {
+	padding: 14px;
+	border-radius: 18px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(104, 133, 167, 0.12);
+}
+
+.app h1,
+.app h2,
+.app h3 {
+	color: var(--heading-color);
+}
+
+.app p {
+	color: var(--text-color);
+}
+
+.app .hourly-tooltip {
+	background: var(--tooltip-bg);
+}
+
+.app .hourly-chart-wrap {
+	color: var(--chart-text);
+}
+
+@media (max-width: 940px) {
+	.weather-bento {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			'current'
+			'hourly'
+			'weekly';
+	}
+}
+
+@media (max-width: 760px) {
+	.app {
+		padding-inline: 12px;
+	}
+
+	.weekly-list {
+		grid-template-columns: 1fr;
+	}
+
+	.search-button {
+		left: 10px;
+	}
+
+	.search-input {
+		font-size: 16px;
+		height: 50px;
+		padding-left: 52px;
+	}
+
+	.search-suggestions {
+		top: calc(100% + 8px);
+	}
+}
