@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 const CITY_SUGGESTIONS = [
   'Kolkata',
   'Mumbai',
-  'Delhi',
+  'Delhi,India',
   'Chennai',
   'Bengaluru',
   'Hyderabad',
@@ -15,6 +15,13 @@ const CITY_SUGGESTIONS = [
   'Paris',
   'Sydney',
   'Toronto',
+  'Los Angeles',
+    'Chicago',
+    'Houston',
+    'Phoenix',
+    'Philadelphia',
+    'San Antonio',
+'New York',
 ];
 
 const SearchBar = ({ onSearch, currentCity = '' }) => {

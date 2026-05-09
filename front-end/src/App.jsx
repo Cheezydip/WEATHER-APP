@@ -64,7 +64,7 @@ function App() {
             </div>
 
             <div className="bento-panel bento-weekly">
-              <WeeklyForecast data={weatherData.weekly} />
+              <WeeklyForecast data={weatherData.weekly} theme={theme} />
             </div>
           </div>
         )}
