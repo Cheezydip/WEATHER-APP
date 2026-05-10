@@ -155,7 +155,7 @@ Choose based on your needs and budget:
 
 ```javascript
 // In front-end/src/api.js or wherever you make API calls
-const API_URL = process.env.VITE_API_URL || 'https://your-railway-url';
+const API_URL = import.meta.env.VITE_API_URL || 'https://your-railway-url';
 ```
 
 ### Option B: Render
@@ -211,7 +211,7 @@ After deploying the backend, update your frontend to use the deployed backend UR
 
 ```javascript
 // Use environment variable or fallback to local
-const API_URL = process.env.VITE_API_URL || 'https://your-deployed-backend-url';
+const API_URL = import.meta.env.VITE_API_URL || 'https://your-deployed-backend-url';
 
 async function fetchWeather(city) {
   const response = await fetch(`${API_URL}/api/weather?city=${city}`);
