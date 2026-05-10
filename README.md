@@ -2,6 +2,10 @@
 
 A modern, responsive weather application built with React and Vite, featuring real-time weather forecasts and interactive hourly charts.
 
+# Live Example
+ https://weather-app-mu-blue-53.vercel.app
+
+ Click to see an example.
 ## Features
 
 - **Real-time Weather Data**: Current weather conditions with temperature, humidity, and wind speed
