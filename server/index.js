@@ -9,6 +9,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    return res.status(200).json({
+        status: 'ok',
+        message: 'Weather API server is running',
+    });
+});
+
 app.get('/api/weather', async (req, res) => {
     const city = req.query.city;
 
