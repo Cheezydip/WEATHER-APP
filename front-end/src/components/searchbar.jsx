@@ -21,7 +21,6 @@ const CITY_SUGGESTIONS = [
     'Phoenix',
     'Philadelphia',
     'San Antonio',
-'New York',
 ];
 
 const SearchBar = ({ onSearch, currentCity = '' }) => {
