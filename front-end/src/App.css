@@ -506,6 +506,15 @@
 		grid-template-columns: 1fr;
 	}
 
+	.bento-hourly .hourly-forecast {
+		min-height: auto;
+	}
+
+	.hourly-chart-wrap {
+		padding: 16px 8px 8px !important;
+		min-height: 320px;
+	}
+
 	.search-button {
 		left: 10px;
 	}
